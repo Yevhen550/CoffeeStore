@@ -1,6 +1,6 @@
-import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import Colors from '../../constants/Colors';
+import React from "react";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import Colors from "../../constants/Colors";
 
 const CategoryButton = ({ title, isActive, onPress }) => {
   return (
@@ -29,26 +29,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 25,
     marginHorizontal: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   activeButton: {
-    backgroundColor: '#F58231',
+    backgroundColor: "#F58231",
   },
   inactiveButton: {
-    backgroundColor: '#E6F0FF',
+    backgroundColor: "#E6F0FF",
     borderWidth: 1,
-    borderColor: '#E6F0FF',
+    borderColor: "#E6F0FF",
   },
   buttonText: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   activeButtonText: {
     color: Colors.white,
   },
   inactiveButtonText: {
-    color: '#F58231',
+    color: "#F58231",
   },
 });
 
