@@ -9,7 +9,7 @@ import { Image } from "react-native";
 import bell from "../assets/bell.png";
 import newspaper from "../assets/newspaper.png";
 import { Home } from "./screens/Home";
-import { Profile } from "./screens/Profile";
+import Profile from "./screens/Profile";
 import { Settings } from "./screens/Settings";
 import { Updates } from "./screens/Updates";
 import { NotFound } from "./screens/NotFound";
@@ -55,12 +55,15 @@ const RootStack = createNativeStackNavigator({
     HomeTabs: {
       screen: HomeTabs,
       options: {
-        title: "Home",
+        title: "Головна",
         headerShown: false,
       },
     },
     Profile: {
       screen: Profile,
+      options: {
+        title: "Меню",
+      },
       linking: {
         path: ":user(@[a-zA-Z0-9-_]+)",
         parse: {
