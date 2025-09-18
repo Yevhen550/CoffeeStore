@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 const ProductCard = ({ imageUrl, title, price }) => {
   const [count, setCount] = useState(0);
@@ -33,14 +33,14 @@ const ProductCard = ({ imageUrl, title, price }) => {
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
     marginVertical: 8,
     marginHorizontal: 12,
     borderRadius: 16,
     padding: 12,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,
@@ -53,44 +53,44 @@ const styles = StyleSheet.create({
   },
   info: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   title: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 4,
-    color: '#333',
+    color: "#333",
   },
   price: {
     fontSize: 14,
-    color: '#555',
-    fontWeight: '500',
+    color: "#555",
+    fontWeight: "500",
   },
   counter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   circle: {
     width: 32,
     height: 32,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#ddd',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderColor: "#ddd",
+    alignItems: "center",
+    justifyContent: "center",
     marginHorizontal: 6,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: "#f9f9f9",
   },
   sign: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#ff6b00',
+    fontWeight: "600",
+    color: "#ff6b00",
   },
   count: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     minWidth: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 

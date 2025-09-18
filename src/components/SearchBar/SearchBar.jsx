@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { SearchBar } from '@rneui/themed';
-import { View, StyleSheet } from 'react-native';
-import Colors from '../../constants/Colors';
+import React, { useState } from "react";
+import { SearchBar } from "@rneui/themed";
+import { View, StyleSheet } from "react-native";
+import Colors from "../../constants/Colors";
 
 const SearchBarComponent = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
-  const updateSearch = text => {
+  const updateSearch = (text) => {
     setSearch(text);
   };
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   searchContainer: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderTopWidth: 0,
     borderBottomWidth: 0,
   },

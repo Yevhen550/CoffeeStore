@@ -1,6 +1,6 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
-import CategoryButton from '../CategoryButton/CategoryButton.jsx';
-import Colors from '../../constants/Colors';
+import { ScrollView, StyleSheet, View } from "react-native";
+import CategoryButton from "../CategoryButton/CategoryButton.jsx";
+import Colors from "../../constants/Colors";
 
 const CategoryList = ({ categories, activeCategory, onCategoryPress }) => {
   return (
@@ -10,7 +10,7 @@ const CategoryList = ({ categories, activeCategory, onCategoryPress }) => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollViewContent}
       >
-        {categories.map(category => (
+        {categories.map((category) => (
           <CategoryButton
             key={category.id || category.name}
             title={category.name}
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     paddingHorizontal: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
 });
 
