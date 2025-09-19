@@ -8,11 +8,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Image } from "react-native";
 import bell from "../assets/bell.png";
 import newspaper from "../assets/newspaper.png";
-import { Home } from "./screens/Home";
-import Profile from "./screens/Profile";
-import { Settings } from "./screens/Settings";
-import { Updates } from "./screens/Updates";
-import { NotFound } from "./screens/NotFound";
+import { Home } from "../screens/Home";
+import Profile from "../screens/Profile";
+import { Settings } from "../screens/Settings";
+import { Updates } from "../screens/Updates";
+import { NotFound } from "../screens/NotFound";
 
 const HomeTabs = createBottomTabNavigator({
   screens: {
@@ -32,12 +32,45 @@ const HomeTabs = createBottomTabNavigator({
         ),
       },
     },
+    Menu: {
+      screen: Home,
+      options: {
+        title: "Menu",
+        tabBarIcon: ({ color, size }) => (
+          <Image
+            source={newspaper}
+            tintColor={color}
+            style={{
+              width: size,
+              height: size,
+            }}
+          />
+        ),
+      },
+    },
+
     Updates: {
       screen: Updates,
       options: {
         tabBarIcon: ({ color, size }) => (
           <Image
             source={bell}
+            tintColor={color}
+            style={{
+              width: size,
+              height: size,
+            }}
+          />
+        ),
+      },
+    },
+    Profile: {
+      screen: Home,
+      options: {
+        title: "Profile",
+        tabBarIcon: ({ color, size }) => (
+          <Image
+            source={newspaper}
             tintColor={color}
             style={{
               width: size,

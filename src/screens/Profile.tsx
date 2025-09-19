@@ -1,13 +1,13 @@
 import { Text } from "@react-navigation/elements";
 import { StaticScreenProps } from "@react-navigation/native";
 import { FlatList, StyleSheet, View } from "react-native";
-import CustomButton from "../../components/CustomButton/CustomButton";
-import alertMessage from "../../helpers/alert";
-import CategoryList from "../../components/CategoryList/CategoryList";
+import CustomButton from "../components/CustomButton/CustomButton";
+import alertMessage from "../helpers/alert";
+import CategoryList from "../components/CategoryList/CategoryList";
 import { SetStateAction, useState } from "react";
-import categories from "../../Data/categories";
-import products from "../../Data/products";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import categories from "../Data/categories";
+import products from "../Data/products";
+import ProductCard from "../components/ProductCard/ProductCard";
 
 type Props = StaticScreenProps<{
   user: string;
