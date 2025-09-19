@@ -9,14 +9,10 @@ import categories from "../Data/categories";
 import products from "../Data/products";
 import ProductCard from "../components/ProductCard/ProductCard";
 
-type Props = StaticScreenProps<{
-  user: string;
-}>;
-
-const Profile = ({ route }: Props) => {
+const Profile = (route) => {
   const [activeCategory, setActiveCategory] = useState(categories[0].name);
 
-  const handleCategoryPress = (categoryName: SetStateAction<string>) => {
+  const handleCategoryPress = (categoryName) => {
     setActiveCategory(categoryName);
   };
 
