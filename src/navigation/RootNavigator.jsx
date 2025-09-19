@@ -153,7 +153,7 @@ const RootNavigator = () => {
   return (
     <RootStack.Navigator>
       <RootStack.Screen
-        name={ROUTES.PRODUCTLIST_SCREEN}
+        name={ROUTES.DRAWER_NAVIGATOR}
         component={ProductListScreen}
         options={{
           title: "Меню",
