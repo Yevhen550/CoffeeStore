@@ -12,7 +12,10 @@ const RootStack = createNativeStackNavigator();
 
 const RootNavigator = () => {
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      initialRouteName={ROUTES.DRAWER_NAVIGATOR}
+      screenOptions={{ headerShown: false }}
+    >
       <RootStack.Screen
         name={ROUTES.DRAWER_NAVIGATOR}
         component={MainNavigator}
@@ -20,7 +23,7 @@ const RootNavigator = () => {
           title: "Home",
           headerTintColor: Colors.secondary,
           // headerRight: () => (
-          //   <MaterialIcons name="menu" color={Colors.secondary} size={36} />
+          //   <MaterialIcons name="home" color={Colors.secondary} size={36} />
           // ),
         }}
       />

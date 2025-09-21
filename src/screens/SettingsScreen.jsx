@@ -1,13 +1,13 @@
 import { Text } from "@react-navigation/elements";
 import { StyleSheet, View } from "react-native";
 
-export function Settings() {
+const SettingsScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Settings Screen</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -21,3 +21,5 @@ const styles = StyleSheet.create({
     gap: 10,
   },
 });
+
+export default SettingsScreen;
