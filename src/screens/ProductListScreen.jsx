@@ -16,11 +16,11 @@ const ProductListScreen = (route) => {
 
   return (
     <View style={styles.container}>
-      <CategoryList
+      {/* <CategoryList
         categories={categories}
         activeCategory={activeCategory}
         onCategoryPress={handleCategoryPress}
-      />
+      /> */}
       <View style={styles.listContainer}>
         <FlatList
           data={products}
@@ -37,14 +37,14 @@ const ProductListScreen = (route) => {
         />
       </View>
 
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <CustomButton
           title="Купити"
           onPress={() => {
             alertMessage();
           }}
         />
-      </View>
+      </View> */}
     </View>
   );
 };

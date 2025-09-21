@@ -1,17 +1,17 @@
 import { Button, Text } from "@react-navigation/elements";
 import { StyleSheet, View } from "react-native";
 
-export function Home() {
+const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
-      <Button screen="Profile" params={{ user: "jane" }}>
+      {/* <Button screen="Profile" params={{ user: "jane" }}>
         Go to Menu
       </Button>
-      <Button screen="Settings">Go to Settings</Button>
+      <Button screen="Settings">Go to Settings</Button> */}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -21,3 +21,4 @@ const styles = StyleSheet.create({
     gap: 10,
   },
 });
+export default HomeScreen;

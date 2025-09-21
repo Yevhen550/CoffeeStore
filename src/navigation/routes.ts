@@ -1,10 +1,15 @@
 export const ROUTES = {
-    PRODUCTLIST_SCREEN: "ProductListScreen",
-    HOME_SCREEN: 'HomeScreen',
-    PROFILE_SCREEN: "ProfileScreen",
-    SETTINGS_SCREEN: "SettingsScreen",
-    PRODUCT_DETAILS: "ProductDetails",
-    MAIN_NAVIGATOR: "MainNavigator",
-    DRAWER_NAVIGATOR: "DrawerNavigator",
-    BOTTOM_TABS: "BottomTabs"
-}
+  PRODUCTLIST_SCREEN: "ProductListScreen",
+  HOME: "Home",
+  PROFILE: "Profile",
+  SETTINGS: "Settings",
+  PRODUCT_DETAILS: "ProductDetails",
+  MAIN_NAVIGATOR: "MainNavigator",
+  DRAWER_NAVIGATOR: "DrawerNavigator",
+  BOTTOM_TABS: "BottomTabs",
+  PRODUCT_STACK: "ProductStack",
+  LOGIN_SCREEN: "LoginScreen",
+  REGISTRATION: "RegistrationScreen",
+  AUTH_STACK: "AuthStack",
+  LOCATION: 'Location'
+} as const;
