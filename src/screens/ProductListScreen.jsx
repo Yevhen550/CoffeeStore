@@ -3,16 +3,22 @@ import CustomButton from "../components/CustomButton/CustomButton";
 import alertMessage from "../helpers/alert";
 import CategoryList from "../components/CategoryList/CategoryList";
 import { useState } from "react";
-import categories from "../Data/categories";
-import products from "../Data/products";
+import categories from "../store/categories";
+import products from "../store/productsData";
 import ProductCard from "../components/ProductCard/ProductCard";
+import { useNavigation } from "@react-navigation/native";
+import { ROUTES } from "../navigation/routes";
 
 const ProductListScreen = (route) => {
-  const [activeCategory, setActiveCategory] = useState(categories[0].name);
+  const navigation = useNavigation();
 
-  const handleCategoryPress = (categoryName) => {
-    setActiveCategory(categoryName);
-  };
+  const handleOnPress = () => navigation.navigate(ROUTES.PRODUCT_DETAILS);
+
+  // const [activeCategory, setActiveCategory] = useState(categories[0].name);
+
+  // const handleCategoryPress = (categoryName) => {
+  //   setActiveCategory(categoryName);
+  // };
 
   return (
     <View style={styles.container}>
@@ -37,14 +43,9 @@ const ProductListScreen = (route) => {
         />
       </View>
 
-      {/* <View style={styles.buttonContainer}>
-        <CustomButton
-          title="Купити"
-          onPress={() => {
-            alertMessage();
-          }}
-        />
-      </View> */}
+      <View style={styles.buttonContainer}>
+        <CustomButton title="Купити" onPress={handleOnPress} />
+      </View>
     </View>
   );
 };
