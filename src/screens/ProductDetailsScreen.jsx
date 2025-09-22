@@ -16,7 +16,6 @@ const ProductDetailsScreen = ({ route }) => {
           <Image source={{ uri: product.imageUrl }} style={styles.image} />
           <Text style={styles.title}>{product.title}</Text>
           <Text style={styles.price}>{product.price} ₴</Text>
-          <Text style={styles.description}>{product.description}</Text>
         </View>
       ))}
 
@@ -43,6 +42,14 @@ const styles = StyleSheet.create({
     color: "red",
   },
   productContainer: {
+    borderRadius: 16,
+    padding: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 14,
+    elevation: 2,
+    borderWidth: 2,
+    borderColor: "transparent",
     marginBottom: 24,
     backgroundColor: "#fff",
   },
