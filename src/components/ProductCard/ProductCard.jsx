@@ -1,33 +1,32 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-const ProductCard = ({ imageUrl, title, price }) => {
-  const [count, setCount] = useState(0);
+const ProductCard = ({ imageUrl, title, price, onPress }) => {
+  const [isSelected, setIsSelected] = useState(false);
 
-  const increment = () => setCount(count + 1);
-  const decrement = () => count > 0 && setCount(count - 1);
+  const handlePress = () => {
+    setIsSelected(!isSelected);
+    if (onPress) {
+      onPress();
+    }
+  };
 
   return (
-    <View style={styles.card}>
+    <TouchableOpacity
+      style={[styles.card, isSelected && styles.selectedCard]}
+      onPress={handlePress}
+      activeOpacity={0.8}
+    >
       <Image source={{ uri: imageUrl }} style={styles.image} />
-
       <View style={styles.info}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.price}>{price} ₴</Text>
+        <Text style={[styles.title, isSelected && styles.selectedText]}>
+          {title}
+        </Text>
+        <Text style={[styles.price, isSelected && styles.selectedText]}>
+          {price} ₴
+        </Text>
       </View>
-
-      <View style={styles.counter}>
-        <TouchableOpacity style={styles.circle} onPress={decrement}>
-          <Text style={styles.sign}>–</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.count}>{count}</Text>
-
-        <TouchableOpacity style={styles.circle} onPress={increment}>
-          <Text style={styles.sign}>+</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -44,6 +43,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 2,
+    borderWidth: 2,
+    borderColor: "transparent",
+  },
+  selectedCard: {
+    borderColor: "#ff8c3a",
+    backgroundColor: "#ffe5d6",
+  },
+  selectedText: {
+    color: "#ff8c3a",
+    fontWeight: "700",
   },
   image: {
     width: 70,
@@ -65,32 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#555",
     fontWeight: "500",
-  },
-  counter: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  circle: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 6,
-    backgroundColor: "#f9f9f9",
-  },
-  sign: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#ff6b00",
-  },
-  count: {
-    fontSize: 16,
-    fontWeight: "500",
-    minWidth: 20,
-    textAlign: "center",
   },
 });
 

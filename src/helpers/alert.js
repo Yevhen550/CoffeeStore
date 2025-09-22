@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 
 const alertMessage = () => {
-  Alert.alert("Увага", "Кнопка відпрацювала коректно!", [
+  Alert.alert("Увага", "Спочатку виберіть товар!", [
     {
       text: "Cancel",
       onPress: () => console.log("Cancel Pressed"),

@@ -3,7 +3,7 @@ export const ROUTES = {
   HOME: "Home",
   PROFILE: "Profile",
   SETTINGS: "Settings",
-  PRODUCT_DETAILS: "ProductDetails",
+  PRODUCT_DETAILS: "ProductDetailsScreen",
   MAIN_NAVIGATOR: "MainNavigator",
   DRAWER_NAVIGATOR: "DrawerNavigator",
   BOTTOM_TABS: "BottomTabs",
