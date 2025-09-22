@@ -22,7 +22,6 @@ const RootNavigator = () => {
         name={ROUTES.DRAWER_NAVIGATOR}
         component={MainNavigator}
         options={{
-          // title: "s",
           headerTintColor: Colors.secondary,
         }}
       />
