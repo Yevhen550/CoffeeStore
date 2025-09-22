@@ -20,11 +20,8 @@ const RootNavigator = () => {
         name={ROUTES.DRAWER_NAVIGATOR}
         component={MainNavigator}
         options={{
-          title: "Home",
+          title: "s",
           headerTintColor: Colors.secondary,
-          // headerRight: () => (
-          //   <MaterialIcons name="home" color={Colors.secondary} size={36} />
-          // ),
         }}
       />
     </RootStack.Navigator>

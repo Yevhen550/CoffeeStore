@@ -9,7 +9,10 @@ const ProductStack = createNativeStackNavigator();
 
 const ProductStackNavigator = () => {
   return (
-    <ProductStack.Navigator initialRouteName={ROUTES.PRODUCTLIST_SCREEN}>
+    <ProductStack.Navigator
+      initialRouteName={ROUTES.PRODUCTLIST_SCREEN}
+      screenOptions={{ headerShown: false }}
+    >
       <ProductStack.Screen
         name={ROUTES.PRODUCTLIST_SCREEN}
         component={ProductListScreen}

@@ -12,9 +12,13 @@ const MainNavigator = () => {
       <Drawer.Screen
         name={ROUTES.BOTTOM_TABS}
         component={BottomTabs}
-        options={{ title: "" }}
+        options={{ title: "Головна" }}
       />
-      <Drawer.Screen name={ROUTES.SETTINGS} component={SettingsScreen} />
+      <Drawer.Screen
+        name={ROUTES.SETTINGS}
+        component={SettingsScreen}
+        options={{ title: "Налаштування" }}
+      />
     </Drawer.Navigator>
   );
 };
