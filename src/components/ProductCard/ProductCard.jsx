@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import Colors from "../../constants/Colors";
 
 const ProductCard = ({ imageUrl, title, price, onPress }) => {
   const [isSelected, setIsSelected] = useState(false);
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white,
     marginVertical: 8,
     marginHorizontal: 12,
     borderRadius: 16,
@@ -47,11 +48,11 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
   },
   selectedCard: {
-    borderColor: "#ff8c3a",
+    borderColor: Colors.secondary,
     backgroundColor: "#ffe5d6",
   },
   selectedText: {
-    color: "#ff8c3a",
+    color: Colors.secondary,
     fontWeight: "700",
   },
   image: {

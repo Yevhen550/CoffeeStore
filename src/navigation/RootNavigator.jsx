@@ -14,13 +14,15 @@ const RootNavigator = () => {
   return (
     <RootStack.Navigator
       initialRouteName={ROUTES.DRAWER_NAVIGATOR}
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+      }}
     >
       <RootStack.Screen
         name={ROUTES.DRAWER_NAVIGATOR}
         component={MainNavigator}
         options={{
-          title: "s",
+          // title: "s",
           headerTintColor: Colors.secondary,
         }}
       />

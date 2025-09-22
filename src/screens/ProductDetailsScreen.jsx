@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView, Alert } from "react-native";
 import CustomButton from "../components/CustomButton/CustomButton";
+import Colors from "../constants/Colors";
 
 const ProductDetailsScreen = ({ route }) => {
   const { selectedProducts } = route.params;
@@ -29,7 +30,7 @@ const ProductDetailsScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white,
   },
   center: {
     flex: 1,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "transparent",
     marginBottom: 24,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white,
   },
   image: {
     width: "100%",
