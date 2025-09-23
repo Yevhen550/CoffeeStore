@@ -110,7 +110,7 @@ const products = [
   {
     id: '13',
     categoryId: '1',
-    title: 'Кава по-віденськи',
+    title: 'По-віденськи',
     imageUrl:
       'https://images.unsplash.com/photo-1594060445139-717b4b8b3a37?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     price: '40',

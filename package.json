@@ -9,6 +9,7 @@
     "ios": "expo run:ios"
   },
   "dependencies": {
+    "@backpackapp-io/react-native-toast": "^0.14.0",
     "@expo/metro-runtime": "~6.1.2",
     "@react-native-vector-icons/material-icons": "^12.3.0",
     "@react-navigation/bottom-tabs": "^7.4.7",

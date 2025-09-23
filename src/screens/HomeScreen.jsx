@@ -1,12 +1,10 @@
 import React from "react";
-import { ScrollView, StyleSheet, FlatList, View } from "react-native";
-import PromoBanner from "../components/PromoBanner/PromoBanner";
-import SectionTitle from "../components/SectionTitle/SectionTitle";
-import ProductCard from "../components/ProductCard/ProductCard";
+import { ScrollView, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import PromoBanner from "../components/PromoBanner/PromoBanner";
 import { ROUTES } from "../navigation/routes";
 import products from "../store/productsData";
-import HorizontalProductCard from "../components/HorizontalProductCard/HorizontalProductCard";
+import ProductSection from "../components/ProductSection/ProductSection";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -18,32 +16,22 @@ const HomeScreen = () => {
         text={"Спеціальна пропозиція\nМаккіато 20%"}
       />
 
-      <SectionTitle
-        title="Ідеально для тебе"
+      <ProductSection
+        title="Холодні напої"
         linkText="Побачити більше"
         onLinkPress={() =>
           navigation.navigate(ROUTES.PRODUCT_MENU, {
             screen: ROUTES.PRODUCTLIST_SCREEN,
           })
         }
+        products={products}
       />
 
-      <FlatList
-        data={products}
-        keyExtractor={(item) => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.cardsRow}
-        renderItem={({ item }) => (
-          <View style={styles.cardWrapper}>
-            <HorizontalProductCard
-              imageUrl={item.imageUrl}
-              title={item.title}
-              price={item.price}
-              onPress={() => console.log(item.title)}
-            />
-          </View>
-        )}
+      <ProductSection
+        title="Гарячі напої"
+        linkText="Дивитися все"
+        onLinkPress={() => console.log("Hot drinks")}
+        products={products.slice(0, 3)}
       />
     </ScrollView>
   );
