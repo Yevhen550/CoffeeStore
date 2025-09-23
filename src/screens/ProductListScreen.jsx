@@ -1,10 +1,10 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import CustomButton from "../components/CustomButton/CustomButton";
-import alertMessage from "../helpers/alert";
-import { useState } from "react";
-import products from "../store/productsData";
-import ProductCard from "../components/ProductCard/ProductCard";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import CustomButton from "../components/CustomButton/CustomButton";
+import ProductCard from "../components/ProductCard/ProductCard";
+import { errorMessageToast } from "../helpers/toastMessages";
+import products from "../store/productsData";
 import { ROUTES } from "../navigation/routes";
 import Colors from "../constants/Colors";
 
@@ -25,7 +25,7 @@ const ProductListScreen = () => {
     if (selectedProducts.length > 0) {
       navigation.navigate(ROUTES.PRODUCT_DETAILS, { selectedProducts });
     } else {
-      alertMessage();
+      errorMessageToast();
     }
   };
 

@@ -1,13 +1,14 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, ScrollView, Alert } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import CustomButton from "../components/CustomButton/CustomButton";
 import Colors from "../constants/Colors";
+import { infoMessageToast } from "../helpers/toastMessages";
 
 const ProductDetailsScreen = ({ route }) => {
   const { selectedProducts } = route.params;
 
   const handleBuyAll = () => {
-    Alert.alert("Покупка", `Ви придбали ${selectedProducts.length} товар(и)!`);
+    infoMessageToast();
   };
 
   return (
