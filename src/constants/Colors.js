@@ -8,7 +8,7 @@ export default {
   success: "#4CAF50",
   error: "#F44336",
   info: "#2196F3",
-  bg: "#ffffff",
+  bg: "#F7E7DC",
   text: "#333333",
   subText: "#666666",
 };

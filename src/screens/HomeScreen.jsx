@@ -1,13 +1,33 @@
-import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import PromoBanner from "../components/PromoBanner/PromoBanner";
 import { ROUTES } from "../navigation/routes";
-import products from "../store/productsData";
 import ProductSection from "../components/ProductSection/ProductSection";
+import { fetchData } from "../API/api";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const result = await fetchData();
+        setData(result);
+      } catch (err) {
+        console.error("Помилка:", err);
+        setError("Не вдалося завантажити дані");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, []);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -16,23 +36,30 @@ const HomeScreen = () => {
         text={"Спеціальна пропозиція\nМаккіато 20%"}
       />
 
-      <ProductSection
-        title="Холодні напої"
-        linkText="Побачити більше"
-        onLinkPress={() =>
-          navigation.navigate(ROUTES.PRODUCT_MENU, {
-            screen: ROUTES.PRODUCTLIST_SCREEN,
-          })
-        }
-        products={products}
-      />
+      {loading && <Text>Завантаження...</Text>}
+      {error && <Text style={{ color: "red" }}>{error}</Text>}
 
-      <ProductSection
-        title="Гарячі напої"
-        linkText="Дивитися все"
-        onLinkPress={() => console.log("Hot drinks")}
-        products={products.slice(0, 3)}
-      />
+      {!loading && !error && (
+        <>
+          <ProductSection
+            title="Холодні напої"
+            linkText="Побачити більше"
+            onLinkPress={() =>
+              navigation.navigate(ROUTES.PRODUCT_MENU, {
+                screen: ROUTES.PRODUCTLIST_SCREEN,
+              })
+            }
+            products={data}
+          />
+
+          <ProductSection
+            title="Гарячі напої"
+            linkText="Дивитися все"
+            onLinkPress={() => console.log("Hot drinks")}
+            products={data}
+          />
+        </>
+      )}
     </ScrollView>
   );
 };
@@ -40,7 +67,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    paddingVertical: 20,
+
     gap: 10,
   },
   cardsRow: {
