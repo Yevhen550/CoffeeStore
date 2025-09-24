@@ -17,9 +17,10 @@ const HomeScreen = () => {
       try {
         setLoading(true);
         const result = await fetchData();
+        // console.log(result);
         setData(result);
       } catch (err) {
-        console.error("Помилка:", err);
+        // console.error("Помилка:", err);
         setError("Не вдалося завантажити дані");
       } finally {
         setLoading(false);
