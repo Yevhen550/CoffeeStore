@@ -1,8 +1,6 @@
 export const fetchData = async () => {
   try {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
 
     if (!response.ok) {
       throw new Error(`Помилка мережі: ${response.status}`);
