@@ -1,11 +1,20 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Dimensions,
+  View,
+} from "react-native";
 import Colors from "../../constants/Colors";
 
-const CustomButton = ({ title, onPress }) => {
+const CustomButton = ({ title, onPress, children }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
+      <View style={styles.content}>
+        <Text style={styles.text}>{title}</Text>
+        {children && <View style={styles.icon}>{children}</View>}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -29,7 +38,15 @@ const styles = StyleSheet.create({
     // Shadow для Android
     elevation: 3,
   },
-  buttonText: {
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    marginLeft: 8,
+  },
+  text: {
     color: Colors.white,
     fontSize: 16,
     fontWeight: "bold",
@@ -37,4 +54,3 @@ const styles = StyleSheet.create({
 });
 
 export default CustomButton;
-  

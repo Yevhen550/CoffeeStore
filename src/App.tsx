@@ -6,10 +6,6 @@ import { toastConfig } from "./helpers/toastConfig";
 import { useEffect } from "react";
 
 const App = () => {
-  useEffect(() => {
-    console.log(process.env.EXPO_PUBLIC_MY_KEY);
-  });
-
   return (
     <NavigationContainer>
       <RootNavigator />
