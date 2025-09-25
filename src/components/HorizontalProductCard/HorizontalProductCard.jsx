@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
 
-const HorizontalProductCard = ({ imageUrl, title, price, onPress }) => {
+const HorizontalProductCard = ({ image, title, price, onPress }) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.8}>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.info}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.price}>{price} ₴</Text>

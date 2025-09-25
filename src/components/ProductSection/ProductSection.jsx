@@ -11,7 +11,6 @@ const ProductSection = ({ title, linkText, onLinkPress, products = [] }) => {
         linkText={linkText}
         onLinkPress={onLinkPress}
       />
-
       <FlatList
         data={products}
         keyExtractor={(item) => item.id}
@@ -21,10 +20,10 @@ const ProductSection = ({ title, linkText, onLinkPress, products = [] }) => {
         renderItem={({ item }) => (
           <View style={styles.cardWrapper}>
             <HorizontalProductCard
-              imageUrl={item.imageUrl}
-              title={item.title}
+              image={item.image}
+              title={item.name}
               price={item.price}
-              onPress={() => console.log(item.title)}
+              onPress={() => console.log(item.name)}
             />
           </View>
         )}
@@ -36,6 +35,7 @@ const ProductSection = ({ title, linkText, onLinkPress, products = [] }) => {
 const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
+    gap: 15,
   },
   cardsRow: {
     paddingLeft: 15,

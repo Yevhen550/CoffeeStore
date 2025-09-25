@@ -1,10 +1,11 @@
 import { Text } from "@react-navigation/elements";
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 
 const SettingsScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Settings Screen</Text>
+      <Image source={require("../assets/Image.png")} style={styles.image} />
     </View>
   );
 };
@@ -19,6 +20,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     gap: 10,
+  },
+  image: {
+    width: 500,
+    height: 500,
+    resizeMode: "contain",
   },
 });
 

@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import RootNavigator from "./navigation/RootNavigator";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "./helpers/toastConfig";
-import { useEffect } from "react";
 
 const App = () => {
   return (
