@@ -9,6 +9,7 @@ import ProductStackNavigator from "./stack/ProductStack";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import Colors from "../constants/Colors";
+import CartScreen from "../screens/CartScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -59,6 +60,16 @@ const BottomTabs = () => {
           tabBarLabel: "Профіль",
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="user" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={ROUTES.CART_SCREEN}
+        component={CartScreen}
+        options={{
+          tabBarLabel: "Корзина",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="opencart" size={size} color={color} />
           ),
         }}
       />
