@@ -12,7 +12,7 @@ export const ROUTES = {
   REGISTRATION: "RegistrationScreen",
   AUTH_STACK: "AuthStack",
   LOCATION: 'Location',
-  FAVORITE: "Обране",
+  FAVORITE: "Favorite",
   CART_SCREEN: "CartScreen"
   
 } as const;

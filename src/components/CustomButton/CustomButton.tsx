@@ -12,17 +12,26 @@ type CustomButtonProps = {
   title: string;
   onPress: () => void;
   children?: ReactNode;
+  theme?: "light" | "dark";
 };
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   title,
   onPress,
   children,
+  theme = "light",
 }) => {
+  const currentColors = Colors[theme];
+
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.button, { backgroundColor: currentColors.secondary }]}
+      onPress={onPress}
+    >
       <View style={styles.content}>
-        <Text style={styles.text}>{title}</Text>
+        <Text style={[styles.text, { color: currentColors.background }]}>
+          {title}
+        </Text>
         {children && <View style={styles.icon}>{children}</View>}
       </View>
     </TouchableOpacity>
@@ -33,7 +42,6 @@ const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Colors.secondary,
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: "center",
@@ -57,7 +65,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   text: {
-    color: Colors.white,
     fontSize: 16,
     fontWeight: "bold",
   },

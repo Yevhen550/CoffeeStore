@@ -1,6 +1,12 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { NavigatorScreenParams } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ROUTES } from "./routes";
+
+/////////////////////
+// Навігаційні типи
+/////////////////////
+
 export type ProfileStackParamList = {
   [ROUTES.PROFILE]: undefined;
   [ROUTES.LOCATION]: undefined;
@@ -28,3 +34,46 @@ export type RootStackParamList = {
   [ROUTES.AUTH_STACK]: NavigatorScreenParams<AuthStackParamList>;
   [ROUTES.LOCATION]: undefined;
 };
+
+// Тип пропсів для будь-якого екрану RootStack
+export type RootStackScreenProps<T extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, T>;
+
+/////////////////////
+// Theme
+/////////////////////
+
+export type ThemeType = "light" | "dark";
+
+/////////////////////
+// CustomButton
+/////////////////////
+
+export type CustomButtonProps = {
+  title: string;
+  onPress: () => void;
+  children?: React.ReactNode;
+  theme?: ThemeType;
+  style?: object;
+  textStyle?: object;
+};
+
+/////////////////////
+// ProductCard
+/////////////////////
+
+export type ProductCardProps = {
+  imageUrl: string;
+  title: string;
+  price: number;
+  onPress?: () => void;
+  isSelected?: boolean;
+  theme?: ThemeType;
+};
+
+/////////////////////
+// ProductListScreen
+/////////////////////
+
+export type ProductListScreenProps =
+  RootStackScreenProps<typeof ROUTES.PRODUCTLIST_SCREEN>;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
@@ -8,19 +8,26 @@ import HomeScreen from "../screens/HomeScreen";
 import ProductStackNavigator from "./stack/ProductStack";
 import FavoritesScreen from "../screens/FavoritesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import Colors from "../constants/Colors";
 import CartScreen from "../screens/CartScreen";
+import Colors from "../constants/Colors";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => {
+  const { theme } = useContext(ThemeContext);
+  const currentColors = Colors[theme];
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: Colors.secondary,
-        tabBarInactiveTintColor: Colors.white,
-        tabBarStyle: styles.tabBar,
+        tabBarActiveTintColor: currentColors.secondary,
+        tabBarInactiveTintColor: currentColors.subText,
+        tabBarStyle: [
+          styles.tabBar,
+          { backgroundColor: currentColors.primary },
+        ],
       }}
     >
       <Tab.Screen
@@ -79,7 +86,6 @@ const BottomTabs = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: Colors.primary,
     height: 70,
     paddingBottom: 5,
   },

@@ -2,28 +2,57 @@ import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
 
-const ProductCard = ({ imageUrl, title, price, onPress }) => {
+const ProductCard = ({
+  imageUrl,
+  title,
+  price,
+  onPress,
+  theme = "light",
+  isSelected: externalSelected,
+}) => {
   const [isSelected, setIsSelected] = useState(false);
+
+  const selected =
+    externalSelected !== undefined ? externalSelected : isSelected;
+  const currentColors = Colors[theme];
 
   const handlePress = () => {
     setIsSelected(!isSelected);
-    if (onPress) {
-      onPress();
-    }
+    if (onPress) onPress();
   };
 
   return (
     <TouchableOpacity
-      style={[styles.card, isSelected && styles.selectedCard]}
+      style={[
+        styles.card,
+        {
+          backgroundColor: selected
+            ? currentColors.secondary + "33"
+            : currentColors.white,
+          borderColor: selected ? currentColors.secondary : "transparent",
+        },
+      ]}
       onPress={handlePress}
       activeOpacity={0.8}
     >
       <Image source={{ uri: imageUrl }} style={styles.image} />
       <View style={styles.info}>
-        <Text style={[styles.title, isSelected && styles.selectedText]}>
+        <Text
+          style={[
+            styles.title,
+            { color: selected ? currentColors.secondary : currentColors.text },
+          ]}
+        >
           {title}
         </Text>
-        <Text style={[styles.price, isSelected && styles.selectedText]}>
+        <Text
+          style={[
+            styles.price,
+            {
+              color: selected ? currentColors.secondary : currentColors.subText,
+            },
+          ]}
+        >
           {price} ₴
         </Text>
       </View>
@@ -35,7 +64,6 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.white,
     marginVertical: 8,
     marginHorizontal: 12,
     borderRadius: 16,
@@ -45,37 +73,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
     borderWidth: 2,
-    borderColor: "transparent",
   },
-  selectedCard: {
-    borderColor: Colors.secondary,
-    backgroundColor: "#ffe5d6",
-  },
-  selectedText: {
-    color: Colors.secondary,
-    fontWeight: "700",
-  },
-  image: {
-    width: 70,
-    height: 70,
-    borderRadius: 12,
-    marginRight: 12,
-  },
-  info: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginBottom: 4,
-    color: "#333",
-  },
-  price: {
-    fontSize: 14,
-    color: "#555",
-    fontWeight: "500",
-  },
+  image: { width: 70, height: 70, borderRadius: 12, marginRight: 12 },
+  info: { flex: 1, justifyContent: "center" },
+  title: { fontSize: 16, fontWeight: "600", marginBottom: 4 },
+  price: { fontSize: 14, fontWeight: "500" },
 });
 
 export default ProductCard;

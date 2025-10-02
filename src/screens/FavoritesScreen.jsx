@@ -1,42 +1,43 @@
-import { View, Text, StyleSheet } from "react-native";
 import React, { useContext } from "react";
+import { Animated, StyleSheet, Text } from "react-native";
 import { ThemeContext } from "../context/ThemeContext";
+import ThemeSwitcher from "../components/ThemeSwitcher/ThemeSwitcher";
+import Colors from "../constants/Colors";
 
 const FavoritesScreen = () => {
   const { theme } = useContext(ThemeContext);
+  const currentColors = Colors[theme];
+
+  const backgroundAnim = new Animated.Value(theme === "light" ? 0 : 1);
+
+  React.useEffect(() => {
+    Animated.timing(backgroundAnim, {
+      toValue: theme === "light" ? 0 : 1,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  }, [theme]);
+
+  const interpolatedBg = backgroundAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [Colors.light.background, Colors.dark.background],
+  });
 
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: theme === "light" ? "#fff" : "#333" },
-      ]}
+    <Animated.View
+      style={[styles.container, { backgroundColor: interpolatedBg }]}
     >
-      <Text style={{ color: theme === "light" ? "#000" : "#fff" }}>
+      <Text style={[styles.text, { color: currentColors.text }]}>
         Вітаю у магазині!
       </Text>
-    </View>
+      <ThemeSwitcher />
+    </Animated.View>
   );
-
-  // return (
-  //   <View style={styles.container}>
-  //     <Text>FavoritesScreen</Text>
-  //   </View>
-  // );
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", justifyContent: "center" },
-  // container: {
-  //   flex: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   gap: 10,
-  // },
-  // row: {
-  //   flexDirection: "row",
-  //   gap: 10,
-  // },
+  text: { fontSize: 20, marginBottom: 20 },
 });
 
 export default FavoritesScreen;
