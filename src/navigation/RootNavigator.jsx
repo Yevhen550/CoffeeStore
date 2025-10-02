@@ -7,6 +7,8 @@ import { ROUTES } from "./routes";
 import ProfileScreen from "../screens/ProfileScreen";
 import HomeScreen from "../screens/HomeScreen";
 import MainNavigator from "./DrawerNavigator";
+import ThemedHeader from "../components/ThemedHeader/ThemedHeader";
+import CustomHeader from "../components/CustomHeader/CustomHeader";
 
 const RootStack = createNativeStackNavigator();
 
@@ -15,7 +17,7 @@ const RootNavigator = () => {
     <RootStack.Navigator
       initialRouteName={ROUTES.DRAWER_NAVIGATOR}
       screenOptions={{
-        headerShown: false,
+        header: () => <CustomHeader />,
       }}
     >
       <RootStack.Screen
