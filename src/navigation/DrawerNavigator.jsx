@@ -4,16 +4,20 @@ import { ROUTES } from "./routes";
 import BottomTabs from "./BottomTabs";
 import SettingsScreen from "../screens/SettingsScreen";
 import Colors from "../constants/Colors";
+import { CustomDrawerContent } from "../components/CustomDrawerContent/CustomDrawerContent";
 
 const Drawer = createDrawerNavigator();
 
 const MainNavigator = () => {
   return (
-    <Drawer.Navigator screenOptions={drawerScreenOptions}>
+    <Drawer.Navigator
+      screenOptions={drawerScreenOptions}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+    >
       <Drawer.Screen
         name={ROUTES.BOTTOM_TABS}
         component={BottomTabs}
-        options={{ title: "Головна" }}
+        options={{ headerShown: false, title: "Головна" }}
       />
       <Drawer.Screen
         name={ROUTES.SETTINGS}
@@ -35,13 +39,17 @@ const drawerScreenOptions = {
   },
   drawerStyle: {
     backgroundColor: Colors.primary,
-    width: 250,
+    width: "85%",
   },
   drawerActiveTintColor: Colors.secondary,
   drawerInactiveTintColor: Colors.white,
   drawerLabelStyle: {
     fontSize: 16,
     fontWeight: "bold",
+  },
+  drawerContentStyle: {
+    paddingVertical: 20,
+    paddingHorizontal: 30,
   },
 };
 

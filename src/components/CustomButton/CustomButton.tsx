@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   TouchableOpacity,
   Text,
@@ -8,7 +8,17 @@ import {
 } from "react-native";
 import Colors from "../../constants/Colors";
 
-const CustomButton = ({ title, onPress, children }) => {
+type CustomButtonProps = {
+  title: string;
+  onPress: () => void;
+  children?: ReactNode;
+};
+
+const CustomButton: React.FC<CustomButtonProps> = ({
+  title,
+  onPress,
+  children,
+}) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.content}>
@@ -28,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    width: width * 0.9,
+    width: width * 0.8,
     alignSelf: "center",
     // Shadow для iOS
     shadowColor: "#000",

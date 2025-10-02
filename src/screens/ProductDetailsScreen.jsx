@@ -1,30 +1,43 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import CustomButton from "../components/CustomButton/CustomButton";
 import Colors from "../constants/Colors";
-import { infoMessageToast } from "../helpers/toastMessages";
+import { infoMessageToast, errorMessageToast } from "../helpers/toastMessages";
+import { ROUTES } from "../navigation/routes";
+import { useNavigation } from "@react-navigation/native";
 
 const ProductDetailsScreen = ({ route }) => {
   const { selectedProducts } = route.params;
+  const navigation = useNavigation();
 
   const handleBuyAll = () => {
-    infoMessageToast();
+    if (selectedProducts.length > 0) {
+      navigation.navigate(ROUTES.CART_SCREEN, { selectedProducts });
+    } else {
+      errorMessageToast();
+    }
   };
 
-  return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {selectedProducts.map((product) => (
-        <View key={product.id} style={styles.productContainer}>
-          <Image source={{ uri: product.imageUrl }} style={styles.image} />
-          <Text style={styles.title}>{product.title}</Text>
-          <Text style={styles.price}>{product.price} ₴</Text>
-        </View>
-      ))}
+  const renderItem = ({ item }) => (
+    <View style={styles.productContainer}>
+      <Image source={{ uri: item.imageUrl }} style={styles.image} />
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.price}>{item.price} ₴</Text>
+    </View>
+  );
 
-      <View style={styles.buttonContainer}>
-        <CustomButton title="Купити" onPress={handleBuyAll} />
-      </View>
-    </ScrollView>
+  return (
+    <FlatList
+      data={selectedProducts}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={renderItem}
+      contentContainerStyle={styles.container}
+      ListFooterComponent={
+        <View style={styles.buttonContainer}>
+          <CustomButton title="Купити" onPress={handleBuyAll} />
+        </View>
+      }
+    />
   );
 };
 
@@ -32,16 +45,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     backgroundColor: Colors.white,
-  },
-  center: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  error: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "red",
   },
   productContainer: {
     borderRadius: 16,
@@ -70,12 +73,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     color: "#4CAF50",
-    marginBottom: 12,
-  },
-  description: {
-    fontSize: 16,
-    color: "#555",
-    lineHeight: 22,
     marginBottom: 12,
   },
   buttonContainer: {
