@@ -2,13 +2,36 @@ import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
 
-const HorizontalProductCard = ({ image, title, price, onPress }) => {
+const HorizontalProductCard = ({
+  image,
+  title,
+  price,
+  onPress,
+  theme = "light",
+}) => {
+  const currentColors = Colors[theme];
+
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.8}>
+    <TouchableOpacity
+      style={[
+        styles.card,
+        {
+          backgroundColor: currentColors.background,
+          shadowColor: currentColors.text,
+          borderColor: currentColors.secondary + "40",
+        },
+      ]}
+      onPress={onPress}
+      activeOpacity={0.8}
+    >
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.info}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.price}>{price} ₴</Text>
+        <Text style={[styles.title, { color: currentColors.text }]}>
+          {title}
+        </Text>
+        <Text style={[styles.price, { color: currentColors.secondary }]}>
+          {price} ₴
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -16,14 +39,16 @@ const HorizontalProductCard = ({ image, title, price, onPress }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.white,
     borderRadius: 12,
     padding: 8,
     width: "100%",
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
+    // Тіні iOS
+    shadowOpacity: 0.12,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 4 },
+    // Тіні Android
+    elevation: 4,
+    borderWidth: 1,
   },
   image: {
     width: "100%",
@@ -38,11 +63,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     marginBottom: 4,
-    color: "#333",
   },
   price: {
     fontSize: 14,
-    color: "#555",
     fontWeight: "500",
   },
 });

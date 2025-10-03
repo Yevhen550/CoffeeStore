@@ -28,8 +28,11 @@ const ProductCard = ({
         {
           backgroundColor: selected
             ? currentColors.secondary + "33"
-            : currentColors.white,
-          borderColor: selected ? currentColors.secondary : "transparent",
+            : currentColors.background,
+          borderColor: selected
+            ? currentColors.secondary
+            : currentColors.secondary + "40",
+          shadowColor: currentColors.text,
         },
       ]}
       onPress={handlePress}
@@ -68,11 +71,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     borderRadius: 16,
     padding: 12,
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-    borderWidth: 2,
+    // Тінь для iOS
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 4 },
+    // Тінь для Android
+    elevation: 6,
+    borderWidth: 1,
   },
   image: { width: 70, height: 70, borderRadius: 12, marginRight: 12 },
   info: { flex: 1, justifyContent: "center" },

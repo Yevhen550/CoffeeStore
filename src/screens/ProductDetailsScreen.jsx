@@ -2,13 +2,14 @@ import React from "react";
 import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import CustomButton from "../components/CustomButton/CustomButton";
 import Colors from "../constants/Colors";
-import { infoMessageToast, errorMessageToast } from "../helpers/toastMessages";
+import { errorMessageToast } from "../helpers/toastMessages";
 import { ROUTES } from "../navigation/routes";
 import { useNavigation } from "@react-navigation/native";
 
-const ProductDetailsScreen = ({ route }) => {
+const ProductDetailsScreen = ({ route, theme = "light" }) => {
   const { selectedProducts } = route.params;
   const navigation = useNavigation();
+  const currentColors = Colors[theme];
 
   const handleBuyAll = () => {
     if (selectedProducts.length > 0) {
@@ -19,10 +20,23 @@ const ProductDetailsScreen = ({ route }) => {
   };
 
   const renderItem = ({ item }) => (
-    <View style={styles.productContainer}>
+    <View
+      style={[
+        styles.productContainer,
+        {
+          backgroundColor: currentColors.background,
+          shadowColor: currentColors.text,
+          borderColor: currentColors.secondary + "40",
+        },
+      ]}
+    >
       <Image source={{ uri: item.imageUrl }} style={styles.image} />
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.price}>{item.price} ₴</Text>
+      <Text style={[styles.title, { color: currentColors.text }]}>
+        {item.title}
+      </Text>
+      <Text style={[styles.price, { color: currentColors.secondary }]}>
+        {item.price} ₴
+      </Text>
     </View>
   );
 
@@ -31,7 +45,10 @@ const ProductDetailsScreen = ({ route }) => {
       data={selectedProducts}
       keyExtractor={(item) => item.id.toString()}
       renderItem={renderItem}
-      contentContainerStyle={styles.container}
+      contentContainerStyle={[
+        styles.container,
+        { backgroundColor: currentColors.background },
+      ]}
       ListFooterComponent={
         <View style={styles.buttonContainer}>
           <CustomButton title="Купити" onPress={handleBuyAll} />
@@ -44,19 +61,18 @@ const ProductDetailsScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: Colors.white,
   },
   productContainer: {
     borderRadius: 16,
     padding: 12,
-    shadowColor: "#000",
+    marginBottom: 24,
+    // Тінь iOS
     shadowOpacity: 0.15,
     shadowRadius: 14,
-    elevation: 2,
-    borderWidth: 2,
-    borderColor: "transparent",
-    marginBottom: 24,
-    backgroundColor: Colors.white,
+    shadowOffset: { width: 0, height: 6 },
+    // Тінь Android
+    elevation: 6,
+    borderWidth: 1,
   },
   image: {
     width: "100%",
@@ -72,7 +88,6 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#4CAF50",
     marginBottom: 12,
   },
   buttonContainer: {
