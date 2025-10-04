@@ -3,10 +3,6 @@ import { NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ROUTES } from "./routes";
 
-/////////////////////
-// Навігаційні типи
-/////////////////////
-
 export type ProfileStackParamList = {
   [ROUTES.PROFILE]: undefined;
   [ROUTES.LOCATION]: undefined;
@@ -35,19 +31,10 @@ export type RootStackParamList = {
   [ROUTES.LOCATION]: undefined;
 };
 
-// Тип пропсів для будь-якого екрану RootStack
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 
-/////////////////////
-// Theme
-/////////////////////
-
 export type ThemeType = "light" | "dark";
-
-/////////////////////
-// CustomButton
-/////////////////////
 
 export type CustomButtonProps = {
   title: string;
@@ -58,10 +45,6 @@ export type CustomButtonProps = {
   textStyle?: object;
 };
 
-/////////////////////
-// ProductCard
-/////////////////////
-
 export type ProductCardProps = {
   imageUrl: string;
   title: string;
@@ -70,10 +53,6 @@ export type ProductCardProps = {
   isSelected?: boolean;
   theme?: ThemeType;
 };
-
-/////////////////////
-// ProductListScreen
-/////////////////////
 
 export type ProductListScreenProps =
   RootStackScreenProps<typeof ROUTES.PRODUCTLIST_SCREEN>;
