@@ -7,19 +7,29 @@ import { Ionicons } from "@expo/vector-icons";
 
 const ThemedHeader = ({ children }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const styles = getStyles(theme);
+  const palette = Colors[theme];
 
   return (
-    <SafeAreaView edges={["top"]} style={styles.safeArea}>
-      <View style={styles.container}>
+    <SafeAreaView
+      edges={["top"]}
+      style={[styles.safeArea, { backgroundColor: palette.primary }]}
+    >
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: palette.primary,
+            borderColor: palette.subText,
+          },
+        ]}
+      >
         {children}
+
         <View style={styles.themeSwitcher}>
           <Ionicons
             name="sunny"
             size={24}
-            color={
-              theme === "light" ? Colors.light.secondary : Colors.dark.subText
-            }
+            color={theme === "light" ? palette.secondary : palette.subText}
           />
           <Switch
             value={theme === "dark"}
@@ -38,9 +48,7 @@ const ThemedHeader = ({ children }) => {
           <Ionicons
             name="moon"
             size={24}
-            color={
-              theme === "dark" ? Colors.dark.secondary : Colors.light.subText
-            }
+            color={theme === "dark" ? palette.secondary : palette.subText}
           />
         </View>
       </View>
@@ -48,28 +56,25 @@ const ThemedHeader = ({ children }) => {
   );
 };
 
-const getStyles = (theme) =>
-  StyleSheet.create({
-    safeArea: {
-      backgroundColor: Colors[theme].primary,
-    },
-    container: {
-      flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      borderBottomWidth: 1,
-      borderColor: "#ccc",
-      backgroundColor: Colors[theme].primary,
-    },
-    themeSwitcher: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginLeft: "auto",
-    },
-    switch: {
-      marginHorizontal: 8,
-    },
-  });
+const styles = StyleSheet.create({
+  safeArea: {
+    width: "100%",
+  },
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
+  themeSwitcher: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: "auto",
+  },
+  switch: {
+    marginHorizontal: 8,
+  },
+});
 
 export default ThemedHeader;

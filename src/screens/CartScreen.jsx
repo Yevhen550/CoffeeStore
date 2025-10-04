@@ -1,61 +1,53 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import React, { useContext } from "react";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem, updateQuantity } from "../redux/cartSlice";
+import { ThemeContext } from "../context/ThemeContext";
+import Colors from "../constants/Colors";
+import CartCard from "../components/CartCard/CartCard";
 
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
 
   return (
-    <View style={styles.container}>
-      {cart.length === 0 ? (
-        <Text>Кошик порожній</Text>
-      ) : (
-        cart.map((item) => (
-          <View key={item.id} style={styles.item}>
-            <Text>
-              {item.name} — {item.quantity}
-            </Text>
-            <View style={styles.actions}>
-              <Button
-                title="+"
-                onPress={() =>
-                  dispatch(
-                    updateQuantity({ id: item.id, quantity: item.quantity + 1 })
-                  )
-                }
-              />
-              <Button
-                title="-"
-                onPress={() =>
-                  dispatch(
-                    updateQuantity({ id: item.id, quantity: item.quantity - 1 })
-                  )
-                }
-              />
-              <Button
-                title="Видалити"
-                onPress={() => dispatch(removeItem(item.id))}
-              />
-            </View>
-          </View>
-        ))
-      )}
+    <View style={[styles.container, { backgroundColor: palette.background }]}>
+      <Text style={[styles.title, { color: palette.text }]}>
+        Ваші замовлення
+      </Text>
+
+      <FlatList
+        data={cart}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <CartCard
+            item={item}
+            onIncrease={() =>
+              dispatch(
+                updateQuantity({ id: item.id, quantity: item.quantity + 1 })
+              )
+            }
+            onDecrease={() =>
+              dispatch(
+                updateQuantity({
+                  id: item.id,
+                  quantity: Math.max(item.quantity - 1, 1),
+                })
+              )
+            }
+            onRemove={() => dispatch(removeItem(item.id))}
+          />
+        )}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 10,
-  },
-  item: { marginBottom: 10, padding: 10, borderBottomWidth: 1 },
-  actions: { flexDirection: "row", gap: 8, marginTop: 5 },
+  container: { flex: 1, padding: 16 },
+  title: { fontSize: 20, fontWeight: "600", marginBottom: 16 },
 });
 
 export default CartScreen;

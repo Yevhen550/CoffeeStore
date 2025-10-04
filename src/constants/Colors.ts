@@ -11,7 +11,7 @@ export default {
   dark: {
     primary: "#C67C4E",
     secondary: "#CCB89F",
-    background: "#bbb092ff",
+    background: "#7a6f5d74",
     text: "#ffffff",
     subText: "#cccccc",
     switchTrack: "#767577",

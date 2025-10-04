@@ -78,7 +78,7 @@ const ProductListScreen = () => {
             { backgroundColor: currentColors.background },
           ]}
         >
-          <CustomButton title="Купити" onPress={handleBuy} theme={theme}>
+          <CustomButton title="Додати" onPress={handleBuy} theme={theme}>
             <AnimatedBadge count={selectedProducts.length}>
               <FontAwesome
                 name="shopping-cart"

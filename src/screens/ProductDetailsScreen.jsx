@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/cartSlice";
 import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import CustomButton from "../components/CustomButton/CustomButton";
 import Colors from "../constants/Colors";
@@ -9,11 +11,13 @@ import { useNavigation } from "@react-navigation/native";
 const ProductDetailsScreen = ({ route, theme = "light" }) => {
   const { selectedProducts } = route.params;
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const currentColors = Colors[theme];
 
   const handleBuyAll = () => {
     if (selectedProducts.length > 0) {
-      navigation.navigate(ROUTES.CART_SCREEN, { selectedProducts });
+      selectedProducts.forEach((p) => dispatch(addItem(p)));
+      navigation.navigate(ROUTES.CART_SCREEN);
     } else {
       errorMessageToast();
     }

@@ -5,6 +5,7 @@ import ProductListScreen from "../../screens/ProductListScreen";
 import ProductDetailsScreen from "../../screens/ProductDetailsScreen";
 import { ROUTES } from "../routes";
 import Colors from "../../constants/Colors";
+import CartScreen from "../../screens/CartScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +29,7 @@ const ProductStackNavigator = () => {
             <View
               style={[
                 styles.headerContainer,
-                { backgroundColor: Colors.light.background }, 
+                { backgroundColor: Colors.light.background },
               ]}
             >
               <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -50,7 +51,8 @@ const styles = StyleSheet.create({
   },
   backText: {
     fontSize: 16,
-    color: "#007AFF",
+    color: Colors.light.secondary,
+    paddingVertical: 10,
   },
 });
 
