@@ -1,6 +1,6 @@
 export const ROUTES = {
   PRODUCTLIST_SCREEN: "ProductListScreen",
-  HOME: "Головна",
+  HOME: "Home",
   PROFILE: "Профіль",
   SETTINGS: "Settings",
   PRODUCT_DETAILS: "ProductDetailsScreen",
