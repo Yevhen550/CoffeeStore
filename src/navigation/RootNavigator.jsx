@@ -1,14 +1,9 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { MaterialIcons } from "@react-native-vector-icons/material-icons";
-import ProductListScreen from "../screens/ProductListScreen";
 import Colors from "../constants/Colors";
-import { ROUTES } from "./routes";
-import ProfileScreen from "../screens/ProfileScreen";
-import HomeScreen from "../screens/HomeScreen";
 import MainNavigator from "./DrawerNavigator";
-import ThemedHeader from "../components/ThemedHeader/ThemedHeader";
 import CustomHeader from "../components/CustomHeader/CustomHeader";
+import { ROUTES } from "./routes";
 
 const RootStack = createNativeStackNavigator();
 

@@ -1,7 +1,7 @@
 export const ROUTES = {
   PRODUCTLIST_SCREEN: "ProductListScreen",
   HOME: "Home",
-  PROFILE: "Профіль",
+  PROFILE: "Profile",
   SETTINGS: "Settings",
   PRODUCT_DETAILS: "ProductDetailsScreen",
   MAIN_NAVIGATOR: "MainNavigator",
