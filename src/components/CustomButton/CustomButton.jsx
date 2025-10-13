@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { useContext } from "react";
 import {
   TouchableOpacity,
   Text,
@@ -7,29 +7,21 @@ import {
   View,
 } from "react-native";
 import Colors from "../../constants/Colors";
+import { ThemeContext } from "../../context/ThemeContext";
 
-type CustomButtonProps = {
-  title: string;
-  onPress: () => void;
-  children?: ReactNode;
-  theme?: "light" | "dark";
-};
-
-const CustomButton: React.FC<CustomButtonProps> = ({
-  title,
-  onPress,
-  children,
-  theme = "light",
-}) => {
-  const currentColors = Colors[theme];
+const CustomButton = ({ title, onPress, children }) => {
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
 
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: currentColors.secondary }]}
+      style={[styles.button, { backgroundColor: palette.secondary }]}
       onPress={onPress}
+      activeOpacity={0.8} // залишено тимчасово; пізніше можна винести в UIConstants
     >
       <View style={styles.content}>
-        <Text style={[styles.text, { color: currentColors.background }]}>
+        <Text style={[styles.text, { color: palette.background }]}>
+          {" "}
           {title}
         </Text>
         {children && <View style={styles.icon}>{children}</View>}
@@ -49,7 +41,7 @@ const styles = StyleSheet.create({
     width: width * 0.8,
     alignSelf: "center",
     // Shadow для iOS
-    shadowColor: "#000",
+    shadowColor: Colors.light.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,

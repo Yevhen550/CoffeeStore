@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const CategoryButton = ({ title, isActive, onPress }) => {
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
+
   return (
     <TouchableOpacity
       style={[
         styles.button,
-        isActive ? styles.activeButton : styles.inactiveButton,
+        {
+          backgroundColor: isActive ? palette.primary : palette.background,
+          borderColor: isActive ? palette.primary : palette.secondary,
+          borderWidth: isActive ? 0 : 1,
+        },
       ]}
       onPress={onPress}
     >
       <Text
         style={[
           styles.buttonText,
-          isActive ? styles.activeButtonText : styles.inactiveButtonText,
+          {
+            color: isActive ? palette.text : palette.primary,
+          },
         ]}
       >
         {title}
@@ -32,23 +42,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  activeButton: {
-    backgroundColor: "#F58231",
-  },
-  inactiveButton: {
-    backgroundColor: "#E6F0FF",
-    borderWidth: 1,
-    borderColor: "#E6F0FF",
-  },
   buttonText: {
     fontSize: 14,
     fontWeight: "bold",
-  },
-  activeButtonText: {
-    color: Colors.white,
-  },
-  inactiveButtonText: {
-    color: "#F58231",
   },
 });
 

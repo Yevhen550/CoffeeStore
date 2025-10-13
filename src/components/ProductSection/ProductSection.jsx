@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import HorizontalProductCard from "../HorizontalProductCard/HorizontalProductCard";
+import { ThemeContext } from "../../context/ThemeContext";
+import Colors from "../../constants/Colors";
 
 const ProductSection = ({ title, linkText, onLinkPress, products = [] }) => {
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
+
   return (
-    <View style={styles.section}>
+    <View style={[styles.section, { backgroundColor: palette.background }]}>
       <SectionTitle
         title={title}
         linkText={linkText}
@@ -23,6 +28,7 @@ const ProductSection = ({ title, linkText, onLinkPress, products = [] }) => {
               image={item.image}
               title={item.name}
               price={item.price}
+              theme={theme}
               onPress={() => console.log(item.name)}
             />
           </View>

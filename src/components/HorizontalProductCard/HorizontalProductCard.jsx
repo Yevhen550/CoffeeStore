@@ -1,24 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
+import { ThemeContext } from "../../context/ThemeContext";
 
-const HorizontalProductCard = ({
-  image,
-  title,
-  price,
-  onPress,
-  theme = "light",
-}) => {
-  const currentColors = Colors[theme];
+const HorizontalProductCard = ({ image, title, price, onPress }) => {
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
 
   return (
     <TouchableOpacity
       style={[
         styles.card,
         {
-          backgroundColor: currentColors.background,
-          shadowColor: currentColors.text,
-          borderColor: currentColors.secondary + "40",
+          backgroundColor: palette.background,
+          shadowColor: palette.text,
+          borderColor: palette.secondary + "40",
         },
       ]}
       onPress={onPress}
@@ -26,10 +22,8 @@ const HorizontalProductCard = ({
     >
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.info}>
-        <Text style={[styles.title, { color: currentColors.text }]}>
-          {title}
-        </Text>
-        <Text style={[styles.price, { color: currentColors.secondary }]}>
+        <Text style={[styles.title, { color: palette.text }]}>{title}</Text>
+        <Text style={[styles.price, { color: palette.primary }]}>
           {price} ₴
         </Text>
       </View>
@@ -42,11 +36,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 8,
     width: "100%",
-    // Тіні iOS
     shadowOpacity: 0.12,
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 4 },
-    // Тіні Android
     elevation: 4,
     borderWidth: 1,
   },

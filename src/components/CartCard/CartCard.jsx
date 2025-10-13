@@ -13,10 +13,9 @@ const CartCard = ({ item, onIncrease, onDecrease, onRemove }) => {
       style={[
         styles.card,
         {
-          backgroundColor:
-            theme === "light" ? palette.background : palette.background + "AA",
+          backgroundColor: palette.background,
           borderColor: palette.primary,
-          shadowColor: palette.text,
+          shadowColor: theme === "light" ? "#00000022" : "#00000055",
         },
       ]}
     >
@@ -32,7 +31,7 @@ const CartCard = ({ item, onIncrease, onDecrease, onRemove }) => {
           style={[styles.btn, { backgroundColor: palette.primary }]}
           onPress={onDecrease}
         >
-          <Ionicons name="remove" size={20} color="#fff" />
+          <Ionicons name="remove" size={20} color={palette.white} />
         </TouchableOpacity>
 
         <Text style={[styles.quantity, { color: palette.text }]}>
@@ -43,14 +42,14 @@ const CartCard = ({ item, onIncrease, onDecrease, onRemove }) => {
           style={[styles.btn, { backgroundColor: palette.primary }]}
           onPress={onIncrease}
         >
-          <Ionicons name="add" size={20} color="#fff" />
+          <Ionicons name="add" size={20} color={palette.white} />
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.deleteBtn, { backgroundColor: palette.secondary }]}
           onPress={onRemove}
         >
-          <Ionicons name="trash-outline" size={20} color="#fff" />
+          <Ionicons name="trash-outline" size={20} color={palette.white} />
         </TouchableOpacity>
       </View>
     </View>
@@ -65,18 +64,29 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 12,
     marginBottom: 12,
-    borderWidth: 1,
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 2,
+    borderWidth: 1.5,
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 3,
   },
   info: { flex: 1 },
-  name: { fontSize: 16, fontWeight: "500" },
+  name: { fontSize: 16, fontWeight: "600" },
   price: { fontSize: 14 },
   actions: { flexDirection: "row", alignItems: "center", gap: 6 },
-  btn: { borderRadius: 6, padding: 6 },
-  deleteBtn: { borderRadius: 6, padding: 6 },
+  btn: {
+    borderRadius: 8,
+    padding: 6,
+    minWidth: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  deleteBtn: {
+    borderRadius: 8,
+    padding: 6,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   quantity: { fontSize: 16, fontWeight: "600", marginHorizontal: 6 },
 });
 

@@ -1,19 +1,20 @@
 import { ROUTES } from "../../navigation/routes";
-import {
-  DrawerContentComponentProps,
-  DrawerContentScrollView,
-} from "@react-navigation/drawer";
-import React from "react";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
+import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import CustomButton from "../CustomButton/CustomButton";
+import { ThemeContext } from "../../context/ThemeContext";
+import Colors from "../../constants/Colors";
 
-export const CustomDrawerContent = (props: DrawerContentComponentProps) => {
+export const CustomDrawerContent = (props) => {
   const insets = useSafeAreaInsets();
   const { navigation } = props;
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
 
   const navigateToLogin = () => {
     navigation.closeDrawer();
@@ -40,17 +41,25 @@ export const CustomDrawerContent = (props: DrawerContentComponentProps) => {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: palette.background }]}
+      edges={["top", "left", "right"]}
+    >
       <DrawerContentScrollView
         {...props}
         contentContainerStyle={styles.scrollContent}
       >
         <View style={styles.wrapper}>
           <View style={styles.topButtons}>
-            <CustomButton title="Login" onPress={navigateToLogin} />
+            <CustomButton
+              title="Login"
+              onPress={navigateToLogin}
+              theme={theme}
+            />
             <CustomButton
               title="Registration"
               onPress={navigateToRegistration}
+              theme={theme}
             />
           </View>
           <View
@@ -59,8 +68,12 @@ export const CustomDrawerContent = (props: DrawerContentComponentProps) => {
               { paddingBottom: Math.max(insets.bottom, 20) },
             ]}
           >
-            <CustomButton title="Profile" onPress={navigateToProfile} />
-            <CustomButton title="Home" onPress={navigateToHome} />
+            <CustomButton
+              title="Profile"
+              onPress={navigateToProfile}
+              theme={theme}
+            />
+            <CustomButton title="Home" onPress={navigateToHome} theme={theme} />
           </View>
         </View>
       </DrawerContentScrollView>
@@ -89,3 +102,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 });
+
+export default CustomDrawerContent;

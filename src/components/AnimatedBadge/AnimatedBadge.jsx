@@ -1,8 +1,12 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { Animated, StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const AnimatedBadge = ({ count, children }) => {
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
+
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -27,11 +31,15 @@ const AnimatedBadge = ({ count, children }) => {
         style={[
           styles.badge,
           {
+            backgroundColor: palette.danger,
             transform: [{ scale: scaleAnim }],
           },
         ]}
       >
-        <Text style={styles.badgeText}>{count}</Text>
+        <Text style={[styles.badgeText, { color: palette.white }]}>
+          {" "}
+          {count}
+        </Text>
       </Animated.View>
     </View>
   );
@@ -42,13 +50,12 @@ const styles = StyleSheet.create({
     padding: 16,
     borderTopWidth: 1,
     borderColor: "#eee",
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.light.background,
   },
   badge: {
     position: "absolute",
     top: -6,
     right: -10,
-    backgroundColor: "red",
     borderRadius: 10,
     width: 20,
     height: 20,
@@ -56,7 +63,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   badgeText: {
-    color: "white",
     fontSize: 12,
     fontWeight: "bold",
   },

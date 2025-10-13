@@ -1,10 +1,15 @@
+import React, { useContext } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import CategoryButton from "../CategoryButton/CategoryButton.jsx";
 import Colors from "../../constants/Colors";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const CategoryList = ({ categories, activeCategory, onCategoryPress }) => {
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: palette.background }]}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -25,7 +30,6 @@ const CategoryList = ({ categories, activeCategory, onCategoryPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.background,
     paddingVertical: 10,
   },
   scrollViewContent: {

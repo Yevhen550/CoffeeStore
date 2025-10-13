@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const ProductCard = ({
   imageUrl,
   title,
   price,
   onPress,
-  theme = "light",
   isSelected: externalSelected,
 }) => {
   const [isSelected, setIsSelected] = useState(false);
+  const { theme } = useContext(ThemeContext);
+  const palette = Colors[theme];
 
   const selected =
     externalSelected !== undefined ? externalSelected : isSelected;
-  const currentColors = Colors[theme];
 
   const handlePress = () => {
     setIsSelected(!isSelected);
@@ -27,12 +28,10 @@ const ProductCard = ({
         styles.card,
         {
           backgroundColor: selected
-            ? currentColors.secondary + "33"
-            : currentColors.background,
-          borderColor: selected
-            ? currentColors.secondary
-            : currentColors.secondary + "40",
-          shadowColor: currentColors.text,
+            ? palette.secondary + "33"
+            : palette.background,
+          borderColor: selected ? palette.secondary : palette.secondary + "40",
+          shadowColor: palette.text,
         },
       ]}
       onPress={handlePress}
@@ -43,7 +42,7 @@ const ProductCard = ({
         <Text
           style={[
             styles.title,
-            { color: selected ? currentColors.secondary : currentColors.text },
+            { color: selected ? palette.secondary : palette.text },
           ]}
         >
           {title}
@@ -51,9 +50,7 @@ const ProductCard = ({
         <Text
           style={[
             styles.price,
-            {
-              color: selected ? currentColors.secondary : currentColors.subText,
-            },
+            { color: selected ? palette.secondary : palette.subText },
           ]}
         >
           {price} ₴
@@ -71,11 +68,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     borderRadius: 16,
     padding: 12,
-    // Тінь для iOS
     shadowOpacity: 0.15,
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 4 },
-    // Тінь для Android
     elevation: 6,
     borderWidth: 1,
   },
@@ -85,4 +80,4 @@ const styles = StyleSheet.create({
   price: { fontSize: 14, fontWeight: "500" },
 });
 
-export default ProductCard;
+ex;
