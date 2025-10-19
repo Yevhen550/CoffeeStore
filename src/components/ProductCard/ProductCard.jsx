@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   price: { fontSize: 14, fontWeight: "500" },
 });
 
-ex;
+export default ProductCard;
