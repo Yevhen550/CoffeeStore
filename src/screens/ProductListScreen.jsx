@@ -1,7 +1,17 @@
-import { FlatList, StyleSheet, View, Animated } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  View,
+  Animated,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+} from "react-native";
+import cloneDeep from "lodash.clonedeep";
+import sortBy from "lodash.sortby";
 import { useNavigation } from "@react-navigation/native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import CustomButton from "../components/CustomButton/CustomButton";
 import ProductCard from "../components/ProductCard/ProductCard";
 import { errorMessageToast } from "../helpers/toastMessages";
@@ -11,6 +21,13 @@ import Colors from "../constants/Colors";
 import AnimatedBadge from "../components/AnimatedBadge/AnimatedBadge";
 import { ThemeContext } from "../context/ThemeContext";
 
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
+
 const ProductListScreen = () => {
   const navigation = useNavigation();
   const { theme } = useContext(ThemeContext);
@@ -19,6 +36,8 @@ const ProductListScreen = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   const handleSelect = (product) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
     if (selectedProducts.some((p) => p.id === product.id)) {
       setSelectedProducts(selectedProducts.filter((p) => p.id !== product.id));
     } else {
@@ -34,26 +53,34 @@ const ProductListScreen = () => {
     }
   };
 
-  const backgroundAnim = new Animated.Value(theme === "light" ? 0 : 1);
+  const backgroundAnim = useRef(
+    new Animated.Value(theme === "light" ? 0 : 1)
+  ).current;
+
   useEffect(() => {
     Animated.timing(backgroundAnim, {
       toValue: theme === "light" ? 0 : 1,
       duration: 300,
       useNativeDriver: false,
     }).start();
-  }, [theme]);
+  }, [theme, backgroundAnim]);
 
   const interpolatedBg = backgroundAnim.interpolate({
     inputRange: [0, 1],
     outputRange: [Colors.light.background, Colors.dark.background],
   });
 
+  // 🔹 Оптимізована робота з lodash:
+  // 1) cloneDeep — щоб не мутувати вихідний масив products
+  // 2) sortBy — сортуємо товари за ціною перед рендером
+  const sortedProducts = sortBy(cloneDeep(products), "price");
+
   return (
     <Animated.View
       style={[styles.container, { backgroundColor: interpolatedBg }]}
     >
       <FlatList
-        data={products}
+        data={sortedProducts}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <ProductCard
@@ -62,7 +89,6 @@ const ProductListScreen = () => {
             price={item.price}
             onPress={() => handleSelect(item)}
             isSelected={selectedProducts.some((p) => p.id === item.id)}
-            theme={theme}
           />
         )}
         showsVerticalScrollIndicator={false}

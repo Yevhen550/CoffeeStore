@@ -8,6 +8,9 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "scheme": "coffestore",
+
+    "jsEngine": "jsc",
+
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.coffestore"
@@ -15,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+          "backgroundColor": "#ffffff"
       },
       "package": "com.coffestore"
     },

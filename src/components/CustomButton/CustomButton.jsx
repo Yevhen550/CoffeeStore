@@ -17,7 +17,7 @@ const CustomButton = ({ title, onPress, children }) => {
     <TouchableOpacity
       style={[styles.button, { backgroundColor: palette.secondary }]}
       onPress={onPress}
-      activeOpacity={0.8} // залишено тимчасово; пізніше можна винести в UIConstants
+      activeOpacity={0.8}
     >
       <View style={styles.content}>
         <Text style={[styles.text, { color: palette.background }]}>
