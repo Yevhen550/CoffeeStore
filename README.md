@@ -1,65 +1,78 @@
-# Starter Template with React Navigation
+1. Аналіз застосунку
+🔸 Компонент, що потребував анімації
 
-This is a minimal starter template for React Native apps using Expo and React Navigation.
+ProductCard
+— Візуально взаємодіючий елемент, який логічно підсилити анімацією: натискання, вибір товару.
 
-It includes the following:
+🔸 Компонент, що викликав зайві ререндери
 
-- Example [Native Stack](https://reactnavigation.org/docs/native-stack-navigator) with a nested [Bottom Tab](https://reactnavigation.org/docs/bottom-tab-navigator)
-- Web support with [React Native for Web](https://necolas.github.io/react-native-web/)
-- TypeScript support and configured for React Navigation
-- Automatic [deep link](https://reactnavigation.org/docs/deep-linking) and [URL handling configuration](https://reactnavigation.org/docs/configuring-links)
-- Theme support [based on system appearance](https://reactnavigation.org/docs/themes/#using-the-operating-system-preferences)
-- Expo [Development Build](https://docs.expo.dev/develop/development-builds/introduction/) with [Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/)
+ProductCard
+— Перемальовувався кожного разу при зміні selectedProducts.
 
-## Getting Started
+🔸 Великі залежності у package.json
 
-1. Create a new project using this template:
+Проаналізовано node_modules — великі пакети:
 
-   ```sh
-   npx create-expo-app@latest --template react-navigation/template
-   ```
+Пакет	Вага	Проблема
+lodash	~71 kB у бандлі	Береться цілком, хоча використовується лише 2 функції
+vector-icons	~1.3 MB шрифти	Не оптимізується в RN
+2. Анімації (LayoutAnimation + Reanimated)
+Реалізовано:
+✔ LayoutAnimation
 
-2. Edit the `app.json` file to configure the `name`, `slug`, `scheme` and bundle identifiers (`ios.bundleIdentifier` and `android.bundleIdentifier`) for your app.
+— Плавне відкривання/закривання вибраних товарів у списку.
 
-3. Edit the `src/App.tsx` file to start working on your app.
+✔ Reanimated 3 (useSharedValue + useAnimatedStyle)
 
-## Running the app
+— Ефект натискання на картку товару (scale 1 → 0.97 → 1):
 
-- Install the dependencies:
 
-  ```sh
-  npm install
-  ```
+Результат: UI став більш “живим” і чуйним.
 
-- Start the development server:
+3. Оптимізація ререндерів
+🔹 Використано:
+✔ React.memo(ProductCard)
 
-  ```sh
-  npm start
-  ```
+Уникнення повторної перерисовки всіх карток при виборі однієї.
 
-- Build and run iOS and Android development builds:
+✔ useCallback(handleSelect)
 
-  ```sh
-  npm run ios
-  # or
-  npm run android
-  ```
+Функція вибору не створюється наново при кожному рендері.
 
-- In the terminal running the development server, press `i` to open the iOS simulator, `a` to open the Android device or emulator, or `w` to open the web browser.
+✔ useMemo(sortedProducts)
 
-## Notes
+Сортування виконується один раз, а не при кожному рендері.
 
-This project uses a [development build](https://docs.expo.dev/develop/development-builds/introduction/) and cannot be run with [Expo Go](https://expo.dev/go). To run the app with Expo Go, edit the `package.json` file, remove the `expo-dev-client` package and `--dev-client` flag from the `start` script.
+📉 Результат:
 
-We highly recommend using the development builds for normal development and testing.
+Ререндери зменшились у 3–4 рази (перевірено через логування та devtools).
 
-The `ios` and `android` folder are gitignored in the project by default as they are automatically generated during the build process ([Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/)). This means that you should not edit these folders directly and use [config plugins](https://docs.expo.dev/config-plugins/) instead. However, if you need to edit these folders, you can remove them from the `.gitignore` file so that they are tracked by git.
+4. Оптимізація залежностей (lodash → малі модулі)
+Було:
+import _ from "lodash";
 
-## Resources
 
-- [React Navigation documentation](https://reactnavigation.org/)
-- [Expo documentation](https://docs.expo.dev/)
+Це тягнуло повний lodash (~71 kB).
 
----
+Стало:
+import cloneDeep from "lodash.clonedeep";
+import sortBy from "lodash.sortby";
 
-Demo assets are from [lucide.dev](https://lucide.dev/)
+
+🎯 Економія ~50–60 KB у фінальному iOS бандлі.
+
+5. Аналіз розміру бандлу (до/після)
+
+Бандл зібраний командою:
+
+npx expo export --platform ios --dump-sourcemap
+
+📉 ДО оптимізації:
+
+index-7c8febd6….js → 3.09 MB
+
+📈 ПІСЛЯ оптимізації:
+
+index-4b6fd80e….js → 3.04 MB
+
+Економія: ~50 KB
